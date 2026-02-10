@@ -1,8 +1,5 @@
 package com.azahartech.eventdev.modelo;
 
-/**
- * Enumerado para especificar el TipoEvento
- */
 public enum TipoEvento {
     CONCIERTO('C', "Música en vivo"),
     TEATRO('T', "Artes escénicas"),
