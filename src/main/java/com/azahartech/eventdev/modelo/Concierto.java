@@ -1,8 +1,10 @@
 package com.azahartech.eventdev.modelo;
 
+import com.azahartech.eventdev.util.Exportable;
+
 import java.time.LocalDate;
 
-public class Concierto extends Evento {
+public class Concierto extends Evento implements Exportable {
 
     // ATRIBUTOS
     private String bandaPrincipal;
@@ -54,5 +56,20 @@ public class Concierto extends Evento {
         // Actualmente solo devuelve el coste de montaje
         // Se podría mejorar sumando más costes
         return costeMontaje;
+    }
+
+    @Override
+    public String aXML() {
+        return "<Concierto>" +
+                "<Nombre>" + getNombre() + "</Nombre>" +
+                "<Fecha>" + getFecha() + "</Fecha>" +
+                "<Precio>" + getPrecio() + "</Precio>" +
+                "<BandaPrincipal>" + bandaPrincipal + "</BandaPrincipal>" +
+                "</Concierto>";
+    }
+
+    @Override
+    public String aCSV() {
+        return getNombre() + "," + getFecha() + "," + getPrecio() + "," + bandaPrincipal;
     }
 }

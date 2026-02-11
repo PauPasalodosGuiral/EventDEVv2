@@ -1,5 +1,6 @@
 package com.azahartech.eventdev.modelo;
 
+import com.azahartech.eventdev.util.Exportable;
 import com.azahartech.eventdev.util.UtilidadValidacion;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
  * proporciona métodos para calcular precios de venta con margen estándar.
  */
 
-public abstract class Evento {
+public abstract class Evento implements Exportable {
 
 
     private String nombre;
@@ -108,5 +109,36 @@ public abstract class Evento {
     public void mostrarInformacion(){
         System.out.printf("---EVENTO---%nEl evento %s se realizará el dia %s en %s%n---%n", nombre, fecha, recinto.getNombre());
     }
+
+    public void activarEvento() {
+        this.estado = EstadoEvento.ACTIVO;
+    }
+
+    public void finalizarEvento() {
+        this.estado = EstadoEvento.FINALIZADO;
+    }
+
+    @Override
+    public boolean equals(Object otroEvento) {
+        if (this == otroEvento) return true;
+        if (otroEvento == null || getClass() != otroEvento.getClass()) return false;
+        Evento evento = (Evento) otroEvento;
+        return id != null && id.equals(evento.id);
+    }
+    @Override
+    public String aXML() {
+        return "\n\t<nombre>" + this.nombre + "</nombre>\n" +
+                "\t<fecha>" + this.fecha + "</fecha>\n" +
+                "\t<aforo>" + this.recinto.getAforoMaximo() + "</aforo>\n" +
+                "\t<precio>" + this.precio + "</precio>\n" +
+                "\t<codigoevento>" + getId() + "</codigoevento>";
+    }
+
+    @Override
+    public String aCSV() {
+        return this.nombre + ";" + this.fecha + ";" + this.recinto.getAforoMaximo() + ";"
+                + this.precio + ";" + ";" + getId();
+    }
+
 }
 
