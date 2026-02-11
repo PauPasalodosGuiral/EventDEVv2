@@ -10,18 +10,16 @@ class UtilidadValidacionTest {
 
     @Test
     void generaraIdAutomatico_DebeDevolverTrue_SiElIdEsValido() {
-        String resultado;
-
-        resultado = UtilidadValidacion.generaraIdAutomatico("Madrid");
-
-        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MADRI", resultado);
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MADRI", UtilidadValidacion.generaraIdAutomatico("Madrid"));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MADFE", UtilidadValidacion.generaraIdAutomatico("Madrid Festival"));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MAFEM", UtilidadValidacion.generaraIdAutomatico("Madrid Festival Musical"));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MAFMP", UtilidadValidacion.generaraIdAutomatico("Madrid Festival Musical POP"));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MFMPK", UtilidadValidacion.generaraIdAutomatico("Madrid Festival Musical POP Koreano"));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-MFMPK", UtilidadValidacion.generaraIdAutomatico("Madrid Festival Musical POP Koreano BTS"));
     }
     @Test
     void generaraIdAutomatico_DebeDevolverTrue_SiElIdEsValidoConUnNombreNulo() {
-        String resultado;
-
-        resultado = UtilidadValidacion.generaraIdAutomatico(null);
-
-        assertEquals("EVT-"+ LocalDate.now().getYear()+"-DEFAU", resultado);
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-DEFAU", UtilidadValidacion.generaraIdAutomatico(null));
+        assertEquals("EVT-"+ LocalDate.now().getYear()+"-DEFAU", UtilidadValidacion.generaraIdAutomatico(""));
     }
 }

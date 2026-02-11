@@ -44,12 +44,48 @@ public class UtilidadValidacion {
      * @return devuelve un ID
      */
     public static String generaraIdAutomatico(String nombre){
-        final String PREDETERMINADO = "DEFAU";
-        nombre = (nombre != null) ? nombre : PREDETERMINADO;
         String resultado;
-        int año = LocalDate.now().getYear();
 
-        String siglas = nombre.toUpperCase().substring(0, (nombre.length() > 5)? 5: nombre.length());
+        final String PREDETERMINADO = "DEFAU";
+        nombre = (nombre != null && nombre != "") ? nombre : PREDETERMINADO;
+
+        int año = LocalDate.now().getYear();
+        String siglas;
+
+        String[] partesDeNombre = nombre.split(" ");
+
+        switch (partesDeNombre.length){
+            case 1:
+                siglas = nombre.substring(0, (nombre.length() > 5)? 5: nombre.length()).toUpperCase();
+                break;
+
+            case 2:
+                siglas = (partesDeNombre[0].substring(0, (partesDeNombre[0].length() >= 3) ? 3 : partesDeNombre.length) +
+                          partesDeNombre[1].substring(0, (partesDeNombre[1].length() >= 2) ? 2 : partesDeNombre.length)).toUpperCase();
+                break;
+
+            case 3:
+                siglas = (partesDeNombre[0].substring(0, (partesDeNombre[0].length() >= 2) ? 2 : partesDeNombre.length) +
+                          partesDeNombre[1].substring(0, (partesDeNombre[1].length() >= 2) ? 2 : partesDeNombre.length) +
+                          partesDeNombre[2].substring(0, (partesDeNombre[2].length() >= 1) ? 1 : partesDeNombre.length)).toUpperCase();
+                break;
+
+            case 4:
+                siglas = (partesDeNombre[0].substring(0, (partesDeNombre[0].length() >= 2) ? 2 : partesDeNombre.length) +
+                          partesDeNombre[1].substring(0, (partesDeNombre[1].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[2].substring(0, (partesDeNombre[2].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[3].substring(0, (partesDeNombre[3].length() >= 1) ? 1 : partesDeNombre.length)).toUpperCase();
+                break;
+
+            case 5:
+            default:
+                siglas = (partesDeNombre[0].substring(0, (partesDeNombre[0].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[1].substring(0, (partesDeNombre[1].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[2].substring(0, (partesDeNombre[2].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[3].substring(0, (partesDeNombre[3].length() >= 1) ? 1 : partesDeNombre.length) +
+                          partesDeNombre[4].substring(0, (partesDeNombre[4].length() >= 1) ? 1 : partesDeNombre.length)).toUpperCase();
+                break;
+        }
 
 
         resultado = String.format("EVT-%s-%s", año, siglas);
