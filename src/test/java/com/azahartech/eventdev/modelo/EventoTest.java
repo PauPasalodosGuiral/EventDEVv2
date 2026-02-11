@@ -13,48 +13,81 @@ class EventoTest {
 
     @Test
     void testConstructor() {
-        assertEquals("Concierto", evento.consultarNombre());
-        assertEquals(fecha, evento.consultarFecha());
-        assertEquals(recinto, evento.consultarRecinto());
-        assertEquals(50.0, evento.consultarPrecio());
-        assertEquals("PROGRAMADO", evento.consultarEstado());
+        assertEquals("Concierto", evento.getNombre());
+        assertEquals(fecha, evento.getFecha());
+        assertEquals(recinto, evento.getRecinto());
+        assertEquals(50.0, evento.getPrecio());
+        assertEquals(EstadoEvento.PLANIFICADO, evento.getEstado());
+        assertNotNull(evento.getId());
     }
 
     @Test
-    void testConsultarNombre() {
-        assertEquals("Concierto", evento.consultarNombre());
+    void testGetNombre() {
+        assertEquals("Concierto", evento.getNombre());
     }
 
     @Test
-    void testConsultarFecha() {
-        assertEquals(fecha, evento.consultarFecha());
+    void testSetNombre() {
+        evento.setNombre("Nuevo Concierto");
+        assertEquals("Nuevo Concierto", evento.getNombre());
     }
 
     @Test
-    void testConsultarPrecio() {
-        assertEquals(50.0, evento.consultarPrecio());
+    void testGetFecha() {
+        assertEquals(fecha, evento.getFecha());
     }
 
     @Test
-    void testConsultarRecinto() {
-        assertEquals(recinto, evento.consultarRecinto());
+    void testSetFecha() {
+        LocalDate nuevaFecha = LocalDate.of(2025, 6, 15);
+        evento.setFecha(nuevaFecha);
+        assertEquals(nuevaFecha, evento.getFecha());
     }
 
     @Test
-    void testConsultarEstado() {
-        assertEquals("PROGRAMADO", evento.consultarEstado());
+    void testGetPrecio() {
+        assertEquals(50.0, evento.getPrecio());
     }
 
     @Test
-    void testModificarPrecio() {
-        evento.modificarPrecio(75.0);
-        assertEquals(75.0, evento.consultarPrecio());
+    void testSetPrecio() {
+        evento.setPrecio(75.0);
+        assertEquals(75.0, evento.getPrecio());
     }
 
     @Test
-    void testModificarEstado() {
-        evento.modificarEstado("CANCELADO");
-        assertEquals("CANCELADO", evento.consultarEstado());
+    void testGetRecinto() {
+        assertEquals(recinto, evento.getRecinto());
+    }
+
+    @Test
+    void testSetRecinto() {
+        Recinto nuevoRecinto = new Recinto("Pabellon", "Barcelona", 30000);
+        evento.setRecinto(nuevoRecinto);
+        assertEquals(nuevoRecinto, evento.getRecinto());
+    }
+
+    @Test
+    void testGetEstado() {
+        assertEquals(EstadoEvento.PLANIFICADO, evento.getEstado());
+    }
+
+    @Test
+    void testSetEstado() {
+        evento.setEstado(EstadoEvento.CANCELADO);
+        assertEquals(EstadoEvento.CANCELADO, evento.getEstado());
+    }
+
+
+    @Test
+    void testSetTipo() {
+        evento.setTipo(TipoEvento.DEPORTE);
+        assertEquals(TipoEvento.DEPORTE, evento.getTipo());
+    }
+
+    @Test
+    void testGetId() {
+        assertNotNull(evento.getId());
     }
 
     @Test
@@ -63,7 +96,7 @@ class EventoTest {
     }
 
     @Test
-    void testConsultarId() {
-        assertNull(evento.consultarId());
+    void testMostrarInformacion() {
+        assertDoesNotThrow(() -> evento.mostrarInformacion());
     }
 }

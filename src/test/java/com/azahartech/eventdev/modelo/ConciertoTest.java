@@ -12,35 +12,47 @@ class ConciertoTest {
 
     @Test
     void testConstructor() {
-        assertEquals("Rock Fest", concierto.consultarNombre());
-        assertEquals(fecha, concierto.consultarFecha());
-        assertEquals(recinto, concierto.consultarRecinto());
-        assertEquals(45.0, concierto.consultarPrecio());
-        assertEquals("PROGRAMADO", concierto.consultarEstado());
-        assertEquals("Rolling Stones", concierto.consultarBandaPrincipal());
-        assertEquals(8000.0, concierto.consultarCosteMontaje());
-        assertEquals("Paint It Black", concierto.consultarListaCanciones());
+        assertEquals("Rock Fest", concierto.getNombre());
+        assertEquals(fecha, concierto.getFecha());
+        assertEquals(recinto, concierto.getRecinto());
+        assertEquals(45.0, concierto.getPrecio());
+        assertEquals(EstadoEvento.PLANIFICADO, concierto.getEstado());
+        assertEquals("Rolling Stones", concierto.getBandaPrincipal());
+        assertEquals(8000.0, concierto.getCosteMontaje());
+        assertEquals("Paint It Black", concierto.getListaCanciones());
     }
 
     @Test
-    void testConsultarBandaPrincipal() {
-        assertEquals("Rolling Stones", concierto.consultarBandaPrincipal());
+    void testGetBandaPrincipal() {
+        assertEquals("Rolling Stones", concierto.getBandaPrincipal());
     }
 
     @Test
-    void testConsultarCosteMontaje() {
-        assertEquals(8000.0, concierto.consultarCosteMontaje());
+    void testSetBandaPrincipal() {
+        concierto.setBandaPrincipal("Queen");
+        assertEquals("Queen", concierto.getBandaPrincipal());
     }
 
     @Test
-    void testConsultarListaCanciones() {
-        assertEquals("Paint It Black", concierto.consultarListaCanciones());
+    void testGetCosteMontaje() {
+        assertEquals(8000.0, concierto.getCosteMontaje());
     }
 
     @Test
-    void testModificarListaCanciones() {
-        concierto.modificarListaCanciones("Angie");
-        assertEquals("Angie", concierto.consultarListaCanciones());
+    void testSetCosteMontaje() {
+        concierto.setCosteMontaje(10000.0);
+        assertEquals(10000.0, concierto.getCosteMontaje());
+    }
+
+    @Test
+    void testGetListaCanciones() {
+        assertEquals("Paint It Black", concierto.getListaCanciones());
+    }
+
+    @Test
+    void testSetListaCanciones() {
+        concierto.setListaCanciones("Angie, Wild Horses");
+        assertEquals("Angie, Wild Horses", concierto.getListaCanciones());
     }
 
     @Test
@@ -53,12 +65,9 @@ class ConciertoTest {
         assertEquals(10400.0, concierto.calcularPrecioVentaRecomendado());
     }
 
-    @Test
-    void testHerenciaMetodos() {
-        concierto.modificarPrecio(55.0);
-        assertEquals(55.0, concierto.consultarPrecio());
 
-        concierto.modificarEstado("VENDIDO");
-        assertEquals("VENDIDO", concierto.consultarEstado());
+    @Test
+    void testMostrarInformacion() {
+        assertDoesNotThrow(() -> concierto.mostrarInformacion());
     }
 }
