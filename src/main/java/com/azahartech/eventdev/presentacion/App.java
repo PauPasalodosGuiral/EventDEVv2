@@ -87,8 +87,8 @@ public class App {
         Recinto recinto;
 
         String nombre, nombreRecinto, direccionRecinto;
-        double precio;
-        LocalDate fecha;
+        double precio = 0;
+        LocalDate fecha = null;
         TipoEvento tipo;
         int aforoMaximo = 0;
 
@@ -124,7 +124,7 @@ public class App {
 
                 if (aforoMaximo <= 0){
                     continuidad = false;
-                    System.out.println("Error: El aforo maximo tiene que ser mayor o igual a 0.");
+                    System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                 }
             } catch (RuntimeException e) {
                 System.out.println("Error: El valor introducido tiene que ser digitos.");
@@ -138,11 +138,11 @@ public class App {
             continuidad = true;
             try {
                 System.out.print("Introduce el precio del evento:");
-                precio = SCANNER.nextInt();
+                precio = SCANNER.nextDouble();
                 SCANNER.nextLine();
 
                 if (precio <= 0){
-                    System.out.println("Error: El valor introducido tiene que ser digitos.");
+                    System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                     continuidad = false;
                 }
             } catch (RuntimeException e) {
@@ -166,7 +166,75 @@ public class App {
             }
         } while (opcion < 1 && opcion > 4);
 
+        switch (opcion){
+            case 1:
+                String bandaPrincipal, listaCanciones;
+                double costeMontaje = 0;
 
+                tipo = TipoEvento.CONCIERTO;
+
+                System.out.print("Introduce el nombre de la banda principal:");
+                bandaPrincipal = SCANNER.nextLine();
+
+                do {
+                    continuidad = true;
+                    try {
+                        System.out.print("Introduce el coste  del evento:");
+                        costeMontaje = SCANNER.nextDouble();
+                        SCANNER.nextLine();
+
+                        if (costeMontaje <= 0){
+                            System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
+                            continuidad = false;
+                        }
+                    } catch (RuntimeException e) {
+                        System.out.println("Error: El valor introducido tiene que ser digitos.");
+                        continuidad = false;
+                    }
+                }while (!continuidad);
+
+                System.out.print("Introduce las conciones que han tocado la banda principal:");
+                listaCanciones = SCANNER.nextLine();
+
+                evento = new Concierto(nombre, fecha, recinto, precio, tipo, bandaPrincipal, costeMontaje, listaCanciones);
+
+                break;
+            case 2:
+                System.out.println("PROXIMAMENTE");
+                break;
+            case 3:
+                String equipoLocal, equipoVisitante;
+                double costeSeguridad = 0;
+
+                System.out.print("Introduce el nombre del equipo Local:");
+                equipoLocal = SCANNER.nextLine();
+
+                System.out.print("Introduce el nombre del equipo Visitante:");
+                equipoVisitante = SCANNER.nextLine();
+
+                do {
+                    continuidad = true;
+                    try {
+                        System.out.print("Introduce el coste  del evento:");
+                        costeMontaje = SCANNER.nextDouble();
+                        SCANNER.nextLine();
+
+                        if (costeMontaje <= 0){
+                            System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
+                            continuidad = false;
+                        }
+                    } catch (RuntimeException e) {
+                        System.out.println("Error: El valor introducido tiene que ser digitos.");
+                        continuidad = false;
+                    }
+                }while (!continuidad);
+
+                evento = new Partido(nombre, fecha, recinto, precio, equipoLocal, equipoVisitante, costeSeguridad);
+                break;
+            case 4:
+                System.out.println("PROXIMAMENTE");
+                break;
+        }
 
     }
 
