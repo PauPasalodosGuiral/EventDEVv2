@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RepositorioGenericoTest {
     @Test
-    void obtener_DeveDevolverTrue_SiSeEliminaCorrectamente() {
+    void obtener_DebeDevolverTrue_SiDevuelveElValorCorrectoDelIndice() {
         String resultado;
         RepositorioGenerico<String> repositorioGenerico = new RepositorioGenerico<>();
         repositorioGenerico.guardar("Objeto1");
@@ -15,9 +15,8 @@ class RepositorioGenericoTest {
 
         assertEquals("Objeto2", repositorioGenerico.obtener(1));
     }
-
     @Test
-    void obtener_DeveDevolverTrue_SiElIndiceSuperaElTamañoDelRepositorio() {
+    void obtener_DebeDevolverTrue_SiElIndiceSuperaElTamañoDelRepositorio() {
         String resultado;
         RepositorioGenerico<String> repositorioGenerico = new RepositorioGenerico<>();
         repositorioGenerico.guardar("Objeto1");
