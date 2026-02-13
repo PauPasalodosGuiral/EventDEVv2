@@ -3,6 +3,8 @@ package com.azahartech.eventdev.modelo;
 import com.azahartech.eventdev.util.Exportable;
 import com.azahartech.eventdev.util.UtilidadValidacion;
 
+import java.util.Objects;
+
 /**
  * Representa un usuario en el sistema de gestión de eventos.
  * Esta clase encapsula la información básica de un usuario, incluyendo
@@ -138,15 +140,15 @@ public class Usuario implements Exportable {
      */
     @Override
     public boolean equals(Object obj) {
-        boolean variable;
-        if (this == obj) {
-            variable = true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
+        boolean variable = false;
+        if ((obj == null) || (getClass() != obj.getClass())) {
             variable = false;
+        } else if  (this == obj){
+            variable = true;
+        } else {
+            Usuario otro = (Usuario) obj;
+            variable = this.email.equals(otro.getEmail());
         }
-        Usuario otro = (Usuario) obj;
-        variable = this.email.equals(otro.getEmail());
         return variable;
     }
 }
