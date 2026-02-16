@@ -15,23 +15,30 @@ public class App {
     private static boolean continuidad = true;
 
     public static void main(String[] args) {
-        System.out.println("""
-                           =====================================================
-                                EVENTDEV V1.0 - SISTEMA DE GESTIÓN INTEGRAL     
-                           =====================================================
-                           """);
+        boolean demo = false;
 
         for (String arg : args) {
-            if (arg.equalsIgnoreCase("--debug")){
-                generarDemo();
+            if (arg.equalsIgnoreCase("--demo")) {
+                demo = true;
             }
         }
 
-        System.out.println("[FASE 1: REGISTRO DE USUARIOS]");
-        registrarUsuarios();
+        System.out.println("""
+                =====================================================
+                     EVENTDEV V1.0 - SISTEMA DE GESTIÓN INTEGRAL     
+                =====================================================
+                """);
 
-        System.out.println("[FASE 2: REGISTRO DE EVENTOS]");
-        registrarEventos();
+        if (demo) {
+            generarDemo();
+
+        } else {
+            System.out.println("[FASE 1: REGISTRO DE USUARIOS]");
+            registrarUsuarios();
+
+            System.out.println("[FASE 2: REGISTRO DE EVENTOS]");
+            registrarEventos();
+        }
 
         System.out.println("[FASE 3: CONTROL DE ESTADOS]");
         controlEstados();
