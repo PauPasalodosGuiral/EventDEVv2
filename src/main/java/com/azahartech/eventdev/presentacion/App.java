@@ -21,6 +21,12 @@ public class App {
                            =====================================================
                            """);
 
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("--debug")){
+                generarDemo();
+            }
+        }
+
         System.out.println("[FASE 1: REGISTRO DE USUARIOS]");
         registrarUsuarios();
 
@@ -50,7 +56,7 @@ public class App {
 
         SCANNER.close();
     }
-
+    // [FASE 1: REGISTRO DE USUARIOS]
     private static void registrarUsuarios(){
         boolean otroUsuario;
 
@@ -93,13 +99,14 @@ public class App {
 
             SERVICIO_USUARIO.registrarUsuario(usuario);
 
-            System.out.println("Quieres añadir a otro usuario? (Si/No)");
+            System.out.print("Quieres añadir a otro usuario? (Si/No): ");
             otroUsuario = SCANNER.nextLine().equalsIgnoreCase("si");
 
         } while (otroUsuario);
 
     }
 
+    // [FASE 2: REGISTRO DE EVENTOS]
     private static void registrarEventos(){
         boolean otroEvento;
         do {
@@ -189,6 +196,11 @@ public class App {
                     SCANNER.nextLine();
 
                     if (opcion < 1 || opcion > 4) {
+                        switch (opcion){
+                            case 2:
+                            case 4:
+                                System.out.println("Esta opcion no esta activa. ");
+                        }
                         System.out.println("Error: La opcion es invalida");
                         continuidad = false;
                     }
@@ -283,20 +295,42 @@ public class App {
         } while (otroEvento);
     }
 
+    // [FASE 3: CONTROL DE ESTADOS]
     private static void controlEstados(){
         Evento evento = SERVICIO_EVENTO.listarTodosLosEventos().get(0);
+
+        System.out.printf("> Estado inicial: %s\n", evento.getEstado());
+
+        evento.activarEvento();
+        System.out.printf("> Estado tras activarVenta(): %s\n", evento.getEstado());
+
+        System.out.printf("> Precio de venta sugerido : %.2f EUR\n", evento.getPrecio());
+
+        System.out.printf("> Eventos antes de limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
+
+        SERVICIO_EVENTO.eliminarEventosPasados();
+        // System.out.printf("> Evento caducado eliminado: %d");
+
+        System.out.printf("> Eventos tras la limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
     }
 
+    // [FASE 4: PASARELA DE PAGOS]
     private static void pasarelaPagos(){
         Usuario usuario = SERVICIO_USUARIO.listarTodosLosUsuario().get(0);
     }
 
+    // [FASE 4: CONSULTAS Y STREAMS]
     private static void consultasYStreams(){
-        System.out.println("> Búsqueda instantánea (ID: EVT-2026-DEFAU): " + SERVICIO_EVENTO.buscarEventoPorId("EVT-2026-DEFAU"));
+        System.out.print("> Dime el id para hacer una búsqueda instantánea:");
+        String idABuscar = SCANNER.nextLine();
+
+        Evento resultado = SERVICIO_EVENTO.buscarEventoPorId(idABuscar);
+        System.out.printf("> Búsqueda instantánea (ID: %s): %s\n", idABuscar, ((resultado != null) ? resultado.getNombre() : "No hay ningun evento"));
         System.out.println("> Catálogo completo ordenado:");
         SERVICIO_EVENTO.mostrarTodoElCatalogo();
     }
 
+    // [FASE 5: EXPORTACIÓN POLIMÓRFICA]
     private static void exportacionPolimorfica(){
         for (Evento evento : SERVICIO_EVENTO.listarTodosLosEventos()) {
             System.out.println("----------------------------------------------------");
@@ -316,11 +350,33 @@ public class App {
 
     }
 
+    // [FASE 6: CIERRE ESPECÍFICO DE EVENTOS]
     private static void cierreEspecificoEventos(){
         for (Evento evento : SERVICIO_EVENTO.listarTodosLosEventos()) {
             System.out.println("Cerrando Evento: " + evento.getNombre());
             evento.finalizarEvento();
-            System.out.println("[OK] Evento finalizado con éxito.");
+            if (evento.getEstado() == EstadoEvento.FINALIZADO){
+                System.out.println("[OK] Evento finalizado con éxito.");
+            } else {
+                System.out.println("[Error] Evento no se ha finalizado con éxito.");
+            }
         }
+    }
+
+    private static void generarDemo(){
+        SERVICIO_EVENTO.registrarEvento(new Concierto("Concierto Evento 1", LocalDate.of(2021, 12, 31), new Recinto("recinto1", "direccion1", 100), 100, TipoEvento.CONCIERTO, "Banda1", 2000,"Cancion1, Cancion2, Cancion23"));
+        SERVICIO_EVENTO.registrarEvento(new Concierto("Concierto Evento 3", LocalDate.of(2033, 12, 31), new Recinto("recinto3", "direccion3", 120), 120, TipoEvento.CONCIERTO, "Banda2", 4000,"Cancion5, Cancion6, Cancion31"));
+        SERVICIO_EVENTO.registrarEvento(new Concierto("Concierto Evento 5", LocalDate.of(2026, 12, 31), new Recinto("recinto5", "direccion5", 140), 140, TipoEvento.CONCIERTO, "Banda3", 20000,"Cancion2, Cancion23, Cancion13"));
+        SERVICIO_EVENTO.registrarEvento(new Concierto("Concierto Evento 7", LocalDate.of(2027, 12, 31), new Recinto("recinto7", "direccion7", 160), 160, TipoEvento.CONCIERTO, "Banda4", 7000,"Cancion6, Cancion23, Cancion35"));
+
+        SERVICIO_EVENTO.registrarEvento(new Partido("Partido Evento 2", LocalDate.of(2022, 12, 31), new Recinto("recinto2", "direccion2", 110), 110, "equipoLocal1", "EquipoVisitante1", 7000));
+        SERVICIO_EVENTO.registrarEvento(new Partido("Partido Evento 4", LocalDate.of(2031, 12, 31), new Recinto("recinto4", "direccion4", 130), 130, "equipoLocal2", "EquipoVisitante2", 70000));
+        SERVICIO_EVENTO.registrarEvento(new Partido("Partido Evento 6", LocalDate.of(2026, 12, 31), new Recinto("recinto6", "direccion6", 150), 150, "equipoLocal3", "EquipoVisitante3", 17000));
+        SERVICIO_EVENTO.registrarEvento(new Partido("Partido Evento 8", LocalDate.of(2027, 12, 31), new Recinto("recinto8", "direccion8", 170), 170, "equipoLocal4", "EquipoVisitante4", 27000));
+
+        SERVICIO_USUARIO.registrarUsuario(new Usuario("Usuario1", "Usuario1@usuario1.com", "612345678", false));
+        SERVICIO_USUARIO.registrarUsuario(new Usuario("Usuario2", "Usuario2@usuario2.com", "612341234", false));
+        SERVICIO_USUARIO.registrarUsuario(new Usuario("Usuario3", "Usuario3@usuario3.com", "622345678", true));
+        SERVICIO_USUARIO.registrarUsuario(new Usuario("Usuario4", "Usuario4@usuario4.com", "632345678", false));
     }
 }
