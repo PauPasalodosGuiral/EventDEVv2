@@ -10,7 +10,7 @@ import com.azahartech.eventdev.util.UtilidadValidacion;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-//
+
 
 public class App {
     private final static Scanner SCANNER = new Scanner(System.in);
