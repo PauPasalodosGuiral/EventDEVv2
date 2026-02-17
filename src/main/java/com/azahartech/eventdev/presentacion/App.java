@@ -1,6 +1,9 @@
 package com.azahartech.eventdev.presentacion;
 
 import com.azahartech.eventdev.modelo.*;
+import com.azahartech.eventdev.pagos.PagoBizum;
+import com.azahartech.eventdev.pagos.PagoPaypal;
+import com.azahartech.eventdev.pagos.ProcesadorPago;
 import com.azahartech.eventdev.servicio.*;
 import com.azahartech.eventdev.util.UtilidadValidacion;
 
@@ -316,7 +319,6 @@ public class App {
         System.out.printf("> Eventos antes de limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
 
         SERVICIO_EVENTO.eliminarEventosPasados();
-        // System.out.printf("> Evento caducado eliminado: %d");
 
         System.out.printf("> Eventos tras la limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
     }
@@ -324,6 +326,15 @@ public class App {
     // [FASE 4: PASARELA DE PAGOS]
     private static void pasarelaPagos(){
         Usuario usuario = SERVICIO_USUARIO.listarTodosLosUsuario().get(0);
+        ProcesadorPago pagoPaypal = new PagoPaypal(usuario.getEmail());
+        ProcesadorPago pagoBizum = new PagoBizum(usuario.getTelefono(), 1234);
+
+        System.out.println("--- Intento de Pago 1: PayPal ---");
+
+
+        System.out.println("--- Intento de Pago 2: Bizum ---");
+
+
     }
 
     // [FASE 4: CONSULTAS Y STREAMS]
