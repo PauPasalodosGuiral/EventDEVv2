@@ -97,19 +97,19 @@ public class App {
                 telefono = SCANNER.nextLine();
 
                 if (!UtilidadValidacion.esTelefonoValido(telefono)) {
-                    System.out.println("Error: El email es incorrecto.");
+                    System.out.println("Error: El telefono es incorrecto.");
                     continuidad = false;
                 }
             } while (!continuidad);
 
-            System.out.print("Eres Vip (Si/No defecto:No):");
+            System.out.print("Eres Vip (Si/No Defecto: No):");
             esVip = SCANNER.nextLine().equalsIgnoreCase("si");
 
             usuario = new Usuario(nombre, email, telefono, esVip);
 
             SERVICIO_USUARIO.registrarUsuario(usuario);
 
-            System.out.print("Quieres añadir a otro usuario? (Si/No): ");
+            System.out.print("Quieres añadir a otro usuario? (Si/No Defecto: No): ");
             otroUsuario = SCANNER.nextLine().equalsIgnoreCase("si");
 
         } while (otroUsuario);
@@ -159,7 +159,7 @@ public class App {
                     aforoMaximo = SCANNER.nextInt();
                     SCANNER.nextLine();
 
-                    if (aforoMaximo <= 0) {
+                    if (aforoMaximo < 0) {
                         continuidad = false;
                         System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                     }
@@ -179,7 +179,7 @@ public class App {
                     precio = SCANNER.nextDouble();
                     SCANNER.nextLine();
 
-                    if (precio <= 0) {
+                    if (precio < 0) {
                         System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                         continuidad = false;
                     }
@@ -206,14 +206,18 @@ public class App {
                     SCANNER.nextLine();
 
                     if (opcion < 1 || opcion > 4) {
-                        switch (opcion){
-                            case 2:
-                            case 4:
-                                System.out.println("Esta opcion no esta activa. ");
-                        }
                         System.out.println("Error: La opcion es invalida");
                         continuidad = false;
                     }
+
+                    switch (opcion){
+                        case 2:
+                        case 4:
+                            System.out.println("Esta opcion no esta activa. ");
+                            continuidad = false;
+                        break;
+                    }
+
                 } catch (RuntimeException e) {
                     SCANNER.nextLine();
 
@@ -242,7 +246,7 @@ public class App {
                             costeMontaje = SCANNER.nextDouble();
                             SCANNER.nextLine();
 
-                            if (costeMontaje <= 0) {
+                            if (costeMontaje < 0) {
                                 System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                                 continuidad = false;
                             }
@@ -279,7 +283,7 @@ public class App {
                             costeSeguridad = SCANNER.nextDouble();
                             SCANNER.nextLine();
 
-                            if (costeSeguridad <= 0) {
+                            if (costeSeguridad < 0) {
                                 System.out.println("Error: El valor tiene que ser mayor o igual a 0.");
                                 continuidad = false;
                             }
@@ -300,7 +304,7 @@ public class App {
             System.out.println("Se ha creado el evento");
             SERVICIO_EVENTO.registrarEvento(evento);
 
-            System.out.print("Quieres crear otro evento (Si/No defecto:no):");
+            System.out.print("Quieres crear otro evento (Si/No Defecto: No):");
             otroEvento = SCANNER.nextLine().equalsIgnoreCase("si");
         } while (otroEvento);
     }
