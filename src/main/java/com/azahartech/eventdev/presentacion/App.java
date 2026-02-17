@@ -320,11 +320,11 @@ public class App {
 
         System.out.printf("> Precio de venta sugerido : %.2f EUR\n", evento.getPrecio());
 
-        System.out.printf("> Eventos antes de limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
+        System.out.printf("> Eventos antes de limpieza: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
 
         SERVICIO_EVENTO.eliminarEventosPasados();
 
-        System.out.printf("> Eventos tras la limpiar: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
+        System.out.printf("> Eventos tras la limpieza: %d\n", SERVICIO_EVENTO.listarTodosLosEventos().size());
     }
 
     // [FASE 4: PASARELA DE PAGOS]
