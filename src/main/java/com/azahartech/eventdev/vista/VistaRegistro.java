@@ -4,6 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VistaRegistro extends JFrame{
+
+    private JTextField nombreField;
+    private JTextField emailField;
+    private JPasswordField contrasenyaField;
+    private JPasswordField repetirContasenyaField;
+    private JTextField edadField;
+    private JButton loginButton;
+    private JButton registroButton;
+
     public VistaRegistro(){
         this.setTitle("Acceso a EventDEV");
         this.setSize(400, 300);
@@ -11,6 +20,7 @@ public class VistaRegistro extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane();
         initUI();
+        initListeners();
     }
 
     private void initUI() {
@@ -21,27 +31,28 @@ public class VistaRegistro extends JFrame{
         pnlFormulario.setLayout(new GridLayout(5,2));
         pnlFormulario.setVisible(true);
 
+        this.nombreField = new JTextField();
+        this.emailField = new JTextField();
+        this.contrasenyaField = new JPasswordField();
+        this.repetirContasenyaField = new JPasswordField();
+        this.edadField = new JTextField();
+
         JLabel lblNombre = new JLabel("Nombre Completo:");
-        JTextField txtNombre = new JTextField();
         JLabel lblEmail = new JLabel("Email:");
-        JTextField txtEmail = new JTextField();
         JLabel lblPassword = new JLabel("Contraseña:");
-        JPasswordField txtPassword = new JPasswordField();
         JLabel lblPasswordRepetir = new JLabel("Repetir Contraseña:");
-        JPasswordField txtPasswordRepetir = new JPasswordField();
         JLabel lblEdad = new JLabel("Edad:");
-        JTextField txtEdad = new JTextField();
 
         pnlFormulario.add(lblNombre);
-        pnlFormulario.add(txtNombre);
+        pnlFormulario.add(nombreField);
         pnlFormulario.add(lblEmail);
-        pnlFormulario.add(txtEmail);
+        pnlFormulario.add(emailField);
         pnlFormulario.add(lblPassword);
-        pnlFormulario.add(txtPassword);
+        pnlFormulario.add(contrasenyaField);
         pnlFormulario.add(lblPasswordRepetir);
-        pnlFormulario.add(txtPasswordRepetir);
+        pnlFormulario.add(repetirContasenyaField );
         pnlFormulario.add(lblEdad);
-        pnlFormulario.add(txtEdad);
+        pnlFormulario.add(edadField);
 
         lienzo.add(pnlFormulario);
 
@@ -61,8 +72,13 @@ public class VistaRegistro extends JFrame{
         pnlBotones.add(btnLogin);
         pnlBotones.add(btnRegistro);
         lienzo.add(pnlBotones, BorderLayout.SOUTH);
-
     }
+    private void initListeners(){
+        registroButton.addActionListener(e ->  {
+            //seguir malañana
+        });
+    }
+
 
 
 }

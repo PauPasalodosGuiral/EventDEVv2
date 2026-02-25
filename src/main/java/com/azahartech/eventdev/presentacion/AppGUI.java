@@ -10,7 +10,7 @@ public class AppGUI {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
-            new VistaDashboard().setVisible(true);
+            new VistaLogin().setVisible(true);
         });
     }
 }
