@@ -74,32 +74,15 @@ public class VistaLogin extends JFrame {
         });
 
         loginButton.addActionListener(e ->  {
-            String email = emailField.getText();
-            String contransenya = new
-                    String(contrasenyaField.getPassword());
-            if (email.equals("admin@eventdev.com") &&
-                    contransenya.equals("1234")) {
-                JOptionPane.showMessageDialog(this,
-                        "¡Bienvenido al sistema, Admin!",
-                        "Acceso concedido",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Usuario o contraseña incorrectos.",
-                        "Acceso denegado",
-                        JOptionPane.ERROR_MESSAGE);
-                contrasenyaField.setText("");
-                contrasenyaField.requestFocus();
-            }
+            intentarLogin();
         });
 
         contrasenyaField.addActionListener(e -> intentarLogin());
         loginButton.addActionListener(e -> intentarLogin());
 
+
         registroButton.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
                 new VistaRegistro().setVisible(true);
-            });
             dispose();
         });
 
@@ -108,12 +91,16 @@ public class VistaLogin extends JFrame {
         String email = emailField.getText();
         String contransenya = new
                 String(contrasenyaField.getPassword());
-        if (email.equals("admin@eventdev.com") &&
-                contransenya.equals("1234")) {
+        if (email.equals("admin") && contransenya.equals("1234")) {
+            /*
             JOptionPane.showMessageDialog(this,
                     "¡Bienvenido al sistema, Admin!",
                     "Acceso concedido",
                     JOptionPane.INFORMATION_MESSAGE);
+                    */
+            this.dispose();
+            new VistaDashboard(email).setVisible(true);
+
         } else {
             JOptionPane.showMessageDialog(this,
                     "Usuario o contraseña incorrectos.",

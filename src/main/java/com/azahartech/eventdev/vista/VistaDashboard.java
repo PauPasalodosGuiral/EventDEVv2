@@ -5,15 +5,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class VistaDashboard extends JFrame {
-    public VistaDashboard() {
+    public VistaDashboard(String nombreUsuario) {
         this.setTitle("Catalogo Eventos");
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initUI();
+        initUI(nombreUsuario);
 }
 
-private void initUI() {
+private void initUI(String nombreUsuario) {
 
         JPanel principalPanel = new JPanel(new BorderLayout());
 
@@ -35,7 +35,7 @@ private void initUI() {
         //estado
         JPanel barraEstadoPanel = new JPanel( new FlowLayout(FlowLayout.LEFT));
 
-        JLabel usuarioLabel = new JLabel("Usuario: Invitado");
+        JLabel usuarioLabel = new JLabel("Usuario: " + nombreUsuario);
         barraEstadoPanel.setBackground(Color.LIGHT_GRAY);
         barraEstadoPanel.add(usuarioLabel);
 

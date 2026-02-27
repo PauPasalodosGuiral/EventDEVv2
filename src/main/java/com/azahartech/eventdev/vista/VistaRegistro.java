@@ -67,18 +67,48 @@ public class VistaRegistro extends JFrame{
         JPanel pnlBotones = new JPanel();
         pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton btnLogin = new JButton("Guardar");
-        JButton btnRegistro = new JButton("Cancelar");
-        pnlBotones.add(btnLogin);
-        pnlBotones.add(btnRegistro);
+        this.loginButton = new JButton("Cancelar");
+        this.registroButton = new JButton("guardar");
+
+        pnlBotones.add(this.loginButton);
+        pnlBotones.add(this.registroButton);
+
         lienzo.add(pnlBotones, BorderLayout.SOUTH);
     }
     private void initListeners(){
         registroButton.addActionListener(e ->  {
-            //seguir malañana
+
+            String nombre = nombreField.getText().trim();
+            String email = emailField.getText().trim();
+            String edad = edadField.getText().trim();
+            String password = new String(contrasenyaField.getPassword());
+            String repetirPassword = new String(repetirContasenyaField.getPassword());
+
+            if (nombre.isEmpty() || email.isEmpty() || edad.isEmpty()
+                    || password.isEmpty() || repetirPassword.isEmpty()) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Todos los campos son obligatorios",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!password.equals(repetirPassword)) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Las contraseñas no coinciden",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+            } else {
+
+                JOptionPane.showMessageDialog(this,
+                        "Usuario registrado",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
         });
+
     }
-
-
-
 }
