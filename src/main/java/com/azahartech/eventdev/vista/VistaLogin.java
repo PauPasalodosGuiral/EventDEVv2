@@ -78,12 +78,11 @@ public class VistaLogin extends JFrame {
         });
 
         contrasenyaField.addActionListener(e -> intentarLogin());
-        loginButton.addActionListener(e -> intentarLogin());
-
 
         registroButton.addActionListener(e -> {
-                new VistaRegistro().setVisible(true);
             dispose();
+            new VistaRegistro().setVisible(true);
+
         });
 
     }

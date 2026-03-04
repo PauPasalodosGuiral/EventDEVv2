@@ -5,12 +5,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class VistaDashboard extends JFrame {
+
+    private JButton salirButton;
+
     public VistaDashboard(String nombreUsuario) {
         this.setTitle("Catalogo Eventos");
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initUI(nombreUsuario);
+        initListeners();
 }
 
 private void initUI(String nombreUsuario) {
@@ -24,11 +28,12 @@ private void initUI(String nombreUsuario) {
         JButton catalogoButton = new JButton("Catálogo");
         JButton entradasButton = new JButton("Mis Entradas");
         JButton perfilButton = new JButton("Perfil");
-        JButton salirButton = new JButton("Salir");
+        this.salirButton = new JButton("Salir");
         barraLateralPanel.add(catalogoButton);
         barraLateralPanel.add(entradasButton);
         barraLateralPanel.add(perfilButton);
         barraLateralPanel.add(salirButton);
+
 
         principalPanel.add(barraLateralPanel, BorderLayout.WEST);
 
@@ -52,11 +57,29 @@ private void initUI(String nombreUsuario) {
         pnlLista.add(new TarjetaEvento("Concierto " + i , "2026-10-10", "100"));
     }
         JScrollPane scrollPane = new JScrollPane(pnlLista);
+    scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+    SwingUtilities.invokeLater(() -> {
+        scrollPane.getVerticalScrollBar().setValue(0);
+    });
 
 
         principalPanel.add(scrollPane, BorderLayout.CENTER);
         this.add(principalPanel);
 
     }
+
+    private void initListeners() {
+        salirButton.addActionListener(e -> {
+            int confirmar = JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de que quieres salir de la sesion",
+                    "Confirmar salida",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirmar == JOptionPane.YES_OPTION) {
+                dispose();
+                new VistaLogin().setVisible(true);
+            }
+        });
+    }
 }
+
 

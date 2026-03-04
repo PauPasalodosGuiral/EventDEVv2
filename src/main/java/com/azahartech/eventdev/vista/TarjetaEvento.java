@@ -28,6 +28,25 @@ public class TarjetaEvento extends JPanel {
 
 
 
+        comprarButton.addActionListener(e -> {
+
+            int opcion = JOptionPane.showConfirmDialog(this,
+                    "¿Quieres comprar una entrada para " + titulo + "?",
+                    "Confirmar Compra",
+                    JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this,
+                        "¡Entrada comprada! (simulación)",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                comprarButton.setEnabled(false);
+                comprarButton.setText("Comprado");
+            }
+        });
+
+
+
 
 
     }
