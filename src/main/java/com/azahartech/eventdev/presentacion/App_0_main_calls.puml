@@ -1,0 +1,467 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "com.azahartech.eventdev.presentacion.App#main(String[])",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "com.azahartech.eventdev.presentacion.App",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1102207897 { 
+   	label=azahartech
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_322381026 { 
+   	label=eventdev
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_1033946343 { 
+   	label=ServicioUsuario
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ServicioUsuario10492497XXXlistarTodosLosUsuario0[
+	label="+ listarTodosLosUsuario()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioUsuario
+
+&#10;  Función que devuelve la lista de usuarios guardados&#10;  @return lista de usuarios guardados.&#10; "
+	fontcolor=darkgreen
+];
+
+ServicioUsuario10492497XXXregistrarUsuario1531808526[
+	label="+ registrarUsuario()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioUsuario
+
+&#10;  Función para guardar el usuario dentro de el repositorio.&#10;  @param nuevoUsuario usuario nuevo para guardar en el RepositorioGenerico.&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1034907594 { 
+   	label=ServicioEvento
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ServicioEvento10492497XXXbuscarEventoPorId1808118735[
+	label="+ buscarEventoPorId()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioEvento
+
+&#10;  Buscar un evento por id&#10;  @param idABuscar&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+
+ServicioEvento10492497XXXeliminarEventosPasados0[
+	label="+ eliminarEventosPasados()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioEvento
+
+&#10;  Eliminar eventos pasados&#10; "
+	fontcolor=darkgreen
+];
+
+ServicioEvento10492497XXXlistarTodosLosEventos0[
+	label="+ listarTodosLosEventos()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioEvento
+
+&#10;  Lista todos los eventos guardado en la Lista&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+
+ServicioEvento10492497XXXmostrarTodoElCatalogo0[
+	label="+ mostrarTodoElCatalogo()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioEvento
+
+&#10;  Mostrar catalogo&#10; "
+	fontcolor=darkgreen
+];
+
+ServicioEvento10492497XXXregistrarEvento2087505205[
+	label="+ registrarEvento()"
+	style=filled
+	fillcolor=white
+	tooltip="ServicioEvento
+
+&#10;  Añadir un evento&#10;  @param nuevoEvento&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1214254169 { 
+   	label=PagoPaypal
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   PagoPaypal393999041XXXprocesarPago1325958191[
+	label="+ procesarPago()"
+	style=filled
+	fillcolor=white
+	tooltip="PagoPaypal
+
+&#10;  Procesa el cobro simulando una redirección a la plataforma de PayPal.&#10;  @param cantidad La cantidad total de entradas a cobrar.&#10;  @return {@code true} siempre que se simule la redirección correctamente.&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1231241673 { 
+   	label=App
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   App384432860XXXmain1859653459[
+	label="+ main()"
+	style=filled
+	fillcolor=white
+	tooltip="App
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1273405637 { 
+   	label=PagoBizum
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   PagoBizum393999041XXXprocesarPago1325958191[
+	label="+ procesarPago()"
+	style=filled
+	fillcolor=white
+	tooltip="PagoBizum
+
+&#10;  Ejecuta el pago verificando el formato del teléfono y una estabilidad de red simulada.&#10;  @param cantidad La cantidad total a cobrar.&#10;  @return {@code true} si el teléfono es válido y no hay error de red;&#10;  {@code false} si el formato es incorrecto o falla la conexión con un 10% de probabilidad.&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1294654382 { 
+   	label=Partido
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Partido743988865XXXaCSV0[
+	label="+ aCSV()"
+	style=filled
+	fillcolor=white
+	tooltip="Partido
+
+&#10;  Crear un archivo CSV de la clase partido&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+
+Partido743988865XXXaXML0[
+	label="+ aXML()"
+	style=filled
+	fillcolor=white
+	tooltip="Partido
+
+&#10;  Crear un archivo XML de la clase partido&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1688645469 { 
+   	label=UtilidadValidacion
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   UtilidadValidacion818407077XXXesEmailValido1808118735[
+	label="+ esEmailValido()"
+	style=filled
+	fillcolor=white
+	tooltip="UtilidadValidacion
+
+&#10; &#10;  @param email&#10;  Sirve para la validacion del email.&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+
+UtilidadValidacion818407077XXXesTelefonoValido1808118735[
+	label="+ esTelefonoValido()"
+	style=filled
+	fillcolor=white
+	tooltip="UtilidadValidacion
+
+&#10;  Valida si un telefono tiene 9 digitos&#10;  @param telefono&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1764418201 { 
+   	label=PagoTarjeta
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   PagoTarjeta393999041XXXprocesarPago1325958191[
+	label="+ procesarPago()"
+	style=filled
+	fillcolor=white
+	tooltip="PagoTarjeta
+
+&#10;  Ejecuta el proceso de pago con tarjeta.&#10;  El metodo incluye una probabilidad del 10% de fallo.&#10;  Verifica que el número de tarjeta cumpla con el estándar de 16 dígitos.&#10;   @param cantidad La cantidad total de la transacción.&#10;  @return {@code true} si la tarjeta es válida y no hubo fallo técnico;&#10;  {@code false} en caso de error aleatorio o formato de tarjeta incorrecto.&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_2007406719 { 
+   	label=Concierto
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Concierto743988865XXXaCSV0[
+	label="+ aCSV()"
+	style=filled
+	fillcolor=white
+	tooltip="Concierto
+
+null"
+	fontcolor=darkgreen
+];
+
+Concierto743988865XXXaXML0[
+	label="+ aXML()"
+	style=filled
+	fillcolor=white
+	tooltip="Concierto
+
+&#10;  Sirve para exportar a xml y csv&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_4497791 { 
+   	label=RepositorioGenerico
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   RepositorioGenerico382929282XXXguardar84[
+	label="+ guardar()"
+	style=filled
+	fillcolor=white
+	tooltip="RepositorioGenerico
+
+&#10;  Guarda el objeto en el repositorio&#10; &#10;  @param objeto es el objeto a guardar&#10; "
+	fontcolor=darkgreen
+];
+
+RepositorioGenerico382929282XXXlistar0[
+	label="+ listar()"
+	style=filled
+	fillcolor=white
+	tooltip="RepositorioGenerico
+
+&#10;  Devuelve la lista completa de elementos almacenados.&#10; &#10;  @return una lista con todos los elementos del repositorio&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_634565217 { 
+   	label=Usuario
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Usuario743988865XXXaCSV0[
+	label="+ aCSV()"
+	style=filled
+	fillcolor=white
+	tooltip="Usuario
+
+&#10;  Convierte los datos del usuario a formato CSV.&#10;  @return una representación en CSV del usuario en el orden: nombre, email, telefono, esVip&#10; "
+	fontcolor=darkgreen
+];
+
+Usuario743988865XXXaXML0[
+	label="+ aXML()"
+	style=filled
+	fillcolor=white
+	tooltip="Usuario
+
+&#10;  Sirve para exportar a xml y csv&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_909243524 { 
+   	label=Evento
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Evento743988865XXXaCSV0[
+	label="+ aCSV()"
+	style=filled
+	fillcolor=white
+	tooltip="Evento
+
+null"
+	fontcolor=darkgreen
+];
+
+Evento743988865XXXaXML0[
+	label="+ aXML()"
+	style=filled
+	fillcolor=white
+	tooltip="Evento
+
+&#10;  Sirve para exportar a xml y csv&#10;  @return&#10; "
+	fontcolor=darkgreen
+];
+
+Evento743988865XXXactivarEvento0[
+	label="+ activarEvento()"
+	style=filled
+	fillcolor=white
+	tooltip="Evento
+
+null"
+	fontcolor=darkgreen
+];
+
+Evento743988865XXXfinalizarEvento0[
+	label="+ finalizarEvento()"
+	style=filled
+	fillcolor=white
+	tooltip="Evento
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+} 
+
+'edges    
+App384432860XXXmain1859653459 -> Evento743988865XXXaCSV0;
+App384432860XXXmain1859653459 -> Evento743988865XXXaXML0;
+App384432860XXXmain1859653459 -> Evento743988865XXXactivarEvento0;
+App384432860XXXmain1859653459 -> Evento743988865XXXfinalizarEvento0;
+App384432860XXXmain1859653459 -> PagoBizum393999041XXXprocesarPago1325958191;
+App384432860XXXmain1859653459 -> PagoPaypal393999041XXXprocesarPago1325958191;
+App384432860XXXmain1859653459 -> PagoTarjeta393999041XXXprocesarPago1325958191;
+App384432860XXXmain1859653459 -> ServicioEvento10492497XXXbuscarEventoPorId1808118735;
+App384432860XXXmain1859653459 -> ServicioEvento10492497XXXeliminarEventosPasados0;
+App384432860XXXmain1859653459 -> ServicioEvento10492497XXXlistarTodosLosEventos0;
+App384432860XXXmain1859653459 -> ServicioEvento10492497XXXmostrarTodoElCatalogo0;
+App384432860XXXmain1859653459 -> ServicioEvento10492497XXXregistrarEvento2087505205;
+App384432860XXXmain1859653459 -> ServicioUsuario10492497XXXlistarTodosLosUsuario0;
+App384432860XXXmain1859653459 -> ServicioUsuario10492497XXXregistrarUsuario1531808526;
+App384432860XXXmain1859653459 -> Usuario743988865XXXaCSV0;
+App384432860XXXmain1859653459 -> Usuario743988865XXXaXML0;
+App384432860XXXmain1859653459 -> UtilidadValidacion818407077XXXesEmailValido1808118735;
+App384432860XXXmain1859653459 -> UtilidadValidacion818407077XXXesTelefonoValido1808118735;
+Evento743988865XXXaCSV0 -> Concierto743988865XXXaCSV0;
+Evento743988865XXXaCSV0 -> Partido743988865XXXaCSV0;
+Evento743988865XXXaXML0 -> Concierto743988865XXXaXML0;
+Evento743988865XXXaXML0 -> Partido743988865XXXaXML0;
+Partido743988865XXXaCSV0 -> Evento743988865XXXaCSV0;
+ServicioEvento10492497XXXeliminarEventosPasados0 -> RepositorioGenerico382929282XXXlistar0;
+ServicioEvento10492497XXXlistarTodosLosEventos0 -> RepositorioGenerico382929282XXXlistar0;
+ServicioEvento10492497XXXregistrarEvento2087505205 -> RepositorioGenerico382929282XXXguardar84;
+ServicioUsuario10492497XXXlistarTodosLosUsuario0 -> RepositorioGenerico382929282XXXlistar0;
+ServicioUsuario10492497XXXregistrarUsuario1531808526 -> RepositorioGenerico382929282XXXguardar84;
+    
+}
+@enduml

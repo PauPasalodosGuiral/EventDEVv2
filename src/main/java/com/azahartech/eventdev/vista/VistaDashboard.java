@@ -19,6 +19,7 @@ public class VistaDashboard extends JFrame {
     private JButton salirButton;
     private JMenuItem nuevoEventoMenuItem;
     private JButton verDetallesButton;
+    private JTable eventosTable;
 
     public VistaDashboard(String nombreUsuario) {
         this.setTitle("Catalogo Eventos");
@@ -90,7 +91,7 @@ private void initUI(String nombreUsuario) {
         eventosTableModel.addRow(fila);
     }
 
-    JTable eventosTable = new JTable(eventosTableModel);
+    eventosTable = new JTable(eventosTableModel);
     
     JScrollPane tableScrollPane = new JScrollPane(eventosTable);
     tableScrollPane.getVerticalScrollBar().setUnitIncrement(20);
@@ -151,7 +152,24 @@ private void initUI(String nombreUsuario) {
         });
 
         verDetallesButton.addActionListener(e -> {
-            //
+            int filaSeleccionada = eventosTable.getSelectedRow();
+
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor, selecciona un evento.");
+            } else {
+
+                String nombreEvento = (String) eventosTable.getValueAt(filaSeleccionada, 1).toString();
+                String fechaEvento = (String) eventosTable.getValueAt(filaSeleccionada, 2).toString();
+                String precioEvento = (String) eventosTable.getValueAt(filaSeleccionada, 3).toString();
+
+                JOptionPane.showMessageDialog(this,
+                                "Nombre: " + nombreEvento + "\n" +
+                                "Fecha: " + fechaEvento + "\n" +
+                                "Precio: " + precioEvento,
+                        "Detalle del evento", JOptionPane.INFORMATION_MESSAGE
+                );
+
+            }
         });
 
 

@@ -1,0 +1,370 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.azahartech.eventdev.presentacion.App",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1102207897 { 
+   	label=azahartech
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_322381026 { 
+   	label=eventdev
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   App384432860[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)App</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- cierreEspecificoEventos()</TD></TR>
+<TR><TD ALIGN="LEFT" >- consultasYStreams()</TD></TR>
+<TR><TD ALIGN="LEFT" >- controlEstados()</TD></TR>
+<TR><TD ALIGN="LEFT" >- exportacionPolimorfica()</TD></TR>
+<TR><TD ALIGN="LEFT" >- generarDemo()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >- pasarelaPagos()</TD></TR>
+<TR><TD ALIGN="LEFT" >- registrarEventos()</TD></TR>
+<TR><TD ALIGN="LEFT" >- registrarUsuarios()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Concierto743988865[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Concierto</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   bandaPrincipal: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   costeMontaje: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   listaCanciones: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ aXML(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ calcularCosteOperativo(): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Evento743988865[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Evento</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   estado: EstadoEvento [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   fecha: LocalDate [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   id: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombre: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   precio: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   recinto: Recinto [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tipo: TipoEvento [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ aXML(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ activarEvento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ calcularCosteOperativo(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ calcularPrecioVentaRecomendado(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ finalizarEvento()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarInformacion()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PagoBizum393999041[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PagoBizum</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   pin: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   telefono: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ procesarPago(cantidad: double): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PagoPaypal393999041[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PagoPaypal</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   emailUsuario: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ procesarPago(cantidad: double): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PagoTarjeta393999041[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PagoTarjeta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   fechaCaducidad: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   numeroTarjeta: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ procesarPago(cantidad: double): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Partido743988865[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Partido</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   costeArbitraje: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   costeSeguridad: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   equipoLocal: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   equipoVisitante: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   resultadoMarcador: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ aXML(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ calcularCosteOperativo(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ consultarEquipoLocal(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ consultarEquipoVisitante(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarInformacion()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Recinto743988865[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Recinto</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   aforoMaximo: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   asientosVip: boolean[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   direccion: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombre: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ aXML(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ contarAsientosVipLibres(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarInformacion()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ reservarAsientoVip(numeroAsiento: int): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+RepositorioGenerico382929282[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)RepositorioGenerico&lt;T&gt;</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   elementos: List&lt;T&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ eliminar(objeto: T)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ guardar(objeto: T)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listar(): List&lt;T&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ obtener(indice: int): T</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ServicioEvento10492497[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ServicioEvento</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   mapaEventos: HashMap&lt;String, Evento&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   repo: RepositorioGenerico&lt;Evento&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ buscarEventoMasCaro(): Evento</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarEventoPorId(idABuscar: String): Evento</TD></TR>
+<TR><TD ALIGN="LEFT" >+ contarEventosGratuitos(): long</TD></TR>
+<TR><TD ALIGN="LEFT" >+ contarEventosPorAforo(aforoMinimo: int): long</TD></TR>
+<TR><TD ALIGN="LEFT" >+ eliminarEventosPasados()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ generarInformeFinanciero()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarTodosLosEventos(): List&lt;Evento&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ mostrarTodoElCatalogo()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ procesarCierreEventos(sc: Scanner)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ registrarEvento(nuevoEvento: Evento)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ServicioUsuario10492497[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ServicioUsuario</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   mapa: Map&lt;String, Usuario&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   repositorio: RepositorioGenerico&lt;Usuario&gt; [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ buscarPorEmail(email: String): Usuario</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buscarPorNombre(nombre: String): Usuario</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listarTodosLosUsuario(): List&lt;Usuario&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ registrarUsuario(nuevoUsuario: Usuario)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Usuario743988865[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Usuario</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   email: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   esVip: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombre: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   telefono: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tipoPago: ProcesadorPago [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ aCSV(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ aXML(): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UtilidadValidacion818407077[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UtilidadValidacion</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ esEmailValido(email: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ esFechaFutura(fecha: LocalDate): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ esTelefonoValido(telefono: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ generaraIdAutomatico(nombre: String): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Evento743988865 -> Concierto743988865[arrowhead=none, arrowtail=empty, dir=both];
+Evento743988865 -> Partido743988865[arrowhead=none, arrowtail=empty, dir=both];
+Evento743988865 -> Recinto743988865[label="recinto
+[0..1]"];
+ServicioEvento10492497 -> Evento743988865[label="mapaEventos
+[0..*]"];
+ServicioEvento10492497 -> Evento743988865[label="repo
+[0..1]"];
+ServicioEvento10492497 -> RepositorioGenerico382929282[label="repo
+[0..1]"];
+ServicioUsuario10492497 -> RepositorioGenerico382929282[label="repositorio
+[0..1]"];
+ServicioUsuario10492497 -> Usuario743988865[label="mapa
+[0..*]"];
+ServicioUsuario10492497 -> Usuario743988865[label="repositorio
+[0..1]"];
+Usuario743988865 -> Concierto743988865[arrowhead=none];
+Usuario743988865 -> Evento743988865[arrowhead=none];
+Usuario743988865 -> PagoBizum393999041[arrowhead=none];
+Usuario743988865 -> PagoPaypal393999041[arrowhead=none];
+Usuario743988865 -> PagoTarjeta393999041[arrowhead=none];
+Usuario743988865 -> Recinto743988865[arrowhead=none];
+    
+}
+@enduml
