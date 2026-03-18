@@ -151,6 +151,10 @@ private void initUI(String nombreUsuario) {
             cerrarSesion();
         });
 
+        nuevoEventoMenuItem.addActionListener(e -> {
+            new NuevoEventoDialog(this, true).setVisible(true);
+        });
+
         verDetallesButton.addActionListener(e -> {
             int filaSeleccionada = eventosTable.getSelectedRow();
 
