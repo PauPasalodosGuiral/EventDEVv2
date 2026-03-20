@@ -68,7 +68,7 @@ public class VistaRegistro extends JFrame{
         pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         this.loginButton = new JButton("Cancelar");
-        this.registroButton = new JButton("guardar");
+        this.registroButton = new JButton("Guardar");
 
         pnlBotones.add(this.loginButton);
         pnlBotones.add(this.registroButton);
@@ -108,6 +108,11 @@ public class VistaRegistro extends JFrame{
                         "Éxito",
                         JOptionPane.INFORMATION_MESSAGE);
             }
+        });
+
+        loginButton.addActionListener(e -> {
+            dispose();
+            new VistaLogin().setVisible(true);
         });
 
     }

@@ -20,8 +20,11 @@ public class VistaDashboard extends JFrame {
     private JMenuItem nuevoEventoMenuItem;
     private JButton verDetallesButton;
     private JTable eventosTable;
+    private static ServicioEvento servicioEvento;
+    private DefaultTableModel eventosTableModel;
 
     public VistaDashboard(String nombreUsuario) {
+        servicioEvento = new ServicioEvento();
         this.setTitle("Catalogo Eventos");
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
@@ -66,14 +69,14 @@ private void initUI(String nombreUsuario) {
         //central
     String[] columnas = {"ID", "Nombre", "Fecha", "Precio"};
 
-    DefaultTableModel eventosTableModel = new DefaultTableModel(columnas, 0){
+    eventosTableModel = new DefaultTableModel(columnas, 0){
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
 
-    ServicioEvento servicioEvento = new ServicioEvento();
+
     for (int i = 0; i < 50; i++) {
         servicioEvento.registrarEvento(new Concierto(
                 "CON" + i, LocalDate.now().plusDays(i), null, 100+i*10, null, null, 0, null
@@ -152,7 +155,10 @@ private void initUI(String nombreUsuario) {
         });
 
         nuevoEventoMenuItem.addActionListener(e -> {
-            new NuevoEventoDialog(this, true).setVisible(true);
+            new NuevoEventoDialog(this, true, servicioEvento).setVisible(true);
+            this.refrescarTabla();
+
+
         });
 
         verDetallesButton.addActionListener(e -> {
@@ -162,9 +168,9 @@ private void initUI(String nombreUsuario) {
                 JOptionPane.showMessageDialog(this, "Por favor, selecciona un evento.");
             } else {
 
-                String nombreEvento = (String) eventosTable.getValueAt(filaSeleccionada, 1).toString();
-                String fechaEvento = (String) eventosTable.getValueAt(filaSeleccionada, 2).toString();
-                String precioEvento = (String) eventosTable.getValueAt(filaSeleccionada, 3).toString();
+                String nombreEvento = eventosTable.getValueAt(filaSeleccionada, 1).toString();
+                String fechaEvento = eventosTable.getValueAt(filaSeleccionada, 2).toString();
+                String precioEvento = eventosTable.getValueAt(filaSeleccionada, 3).toString();
 
                 JOptionPane.showMessageDialog(this,
                                 "Nombre: " + nombreEvento + "\n" +
@@ -172,12 +178,11 @@ private void initUI(String nombreUsuario) {
                                 "Precio: " + precioEvento,
                         "Detalle del evento", JOptionPane.INFORMATION_MESSAGE
                 );
-
             }
         });
-
-
     }
+
+
 
     private void cerrarSesion() {
             int confirmar = JOptionPane.showConfirmDialog(this,
@@ -190,6 +195,23 @@ private void initUI(String nombreUsuario) {
             }
     }
 
+    private void refrescarTabla() {
+        eventosTableModel.setRowCount(0);
+
+        List<Evento> listaEventos = servicioEvento.listarTodosLosEventos();
+
+        for (Evento evento : listaEventos) {
+            Object[] fila = {
+                    evento.getId(),
+                    evento.getNombre(),
+                    evento.getFecha(),
+                    evento.getPrecio()
+            };
+            eventosTableModel.addRow(fila);
+        }
+
+
+    }
 }
 
 
