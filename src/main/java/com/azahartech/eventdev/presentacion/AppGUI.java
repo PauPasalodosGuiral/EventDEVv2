@@ -1,6 +1,5 @@
 package com.azahartech.eventdev.presentacion;
 
-import com.azahartech.eventdev.vista.VistaDashboard;
 import com.azahartech.eventdev.vista.VistaLogin;
 import com.azahartech.eventdev.vista.VistaRegistro;
 

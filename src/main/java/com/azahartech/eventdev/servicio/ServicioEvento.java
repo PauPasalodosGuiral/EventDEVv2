@@ -3,6 +3,7 @@ package com.azahartech.eventdev.servicio;
 import com.azahartech.eventdev.modelo.*;
 import com.azahartech.eventdev.datos.RepositorioGenerico;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -117,6 +118,28 @@ public class ServicioEvento {
      */
     public List<Evento> listarTodosLosEventos(){
         return repo.listar();
+    }
+
+
+    public void importarEventosDesdeCSV(String rutaArchivo) {
+        File file = new File(rutaArchivo);
+        try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))){
+            while (reader.readLine() != null) {
+                String[] datos = reader.readLine().split(";");
+
+                String nombreStr = datos[0];
+                LocalDate fechaStr = LocalDate.parse(datos[2]);
+                double precioStr = Double.parseDouble(datos[4]);
+
+                Concierto concierto = new Concierto(nombreStr, fechaStr, new Recinto(null, null, 0),precioStr, TipoEvento.CONCIERTO, null, 0,null);
+                mapaEventos.put(concierto.getId(), concierto);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("ERROR: Archivo no encontrado");
+        } catch (IOException e) {
+            System.err.println("ERROR: No se ha podido leer el archivo");
+
+        }
     }
 
     /**
