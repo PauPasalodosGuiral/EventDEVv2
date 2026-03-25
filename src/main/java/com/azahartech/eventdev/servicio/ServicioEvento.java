@@ -2,6 +2,7 @@ package com.azahartech.eventdev.servicio;
 
 import com.azahartech.eventdev.modelo.*;
 import com.azahartech.eventdev.datos.RepositorioGenerico;
+import com.azahartech.eventdev.util.UtilidadLog;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -76,9 +77,11 @@ public class ServicioEvento {
      * @return
      */
     public long contarEventosGratuitos() {
-        return mapaEventos.values().stream()
+        long numero = mapaEventos.values().stream()
                 .filter(e -> e.getPrecio() == 0)
                 .count();
+        UtilidadLog.registrar("RESPONSE: Hay " + numero + " Eventos Gratuitos");
+        return numero;
     }
 
     /**
@@ -149,8 +152,11 @@ public class ServicioEvento {
 
                     System.out.println("Importado: " + nombreStr);
 
+
+
                 } catch (Exception e) {
                     System.err.println("Error en línea " + numeroLinea + ": formato inválido");
+                    UtilidadLog.registrar("ERROR: Fallo al importar línea del CSV: " + e.getMessage());
                 }
             }
 
