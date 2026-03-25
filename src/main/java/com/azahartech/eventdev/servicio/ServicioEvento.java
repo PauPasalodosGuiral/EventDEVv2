@@ -123,22 +123,41 @@ public class ServicioEvento {
 
     public void importarEventosDesdeCSV(String rutaArchivo) {
         File file = new File(rutaArchivo);
-        try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))){
-            while (reader.readLine() != null) {
-                String[] datos = reader.readLine().split(";");
 
-                String nombreStr = datos[0];
-                LocalDate fechaStr = LocalDate.parse(datos[2]);
-                double precioStr = Double.parseDouble(datos[4]);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
-                Concierto concierto = new Concierto(nombreStr, fechaStr, new Recinto(null, null, 0),precioStr, TipoEvento.CONCIERTO, null, 0,null);
-                mapaEventos.put(concierto.getId(), concierto);
+            String linea;
+            int numeroLinea = 0;
+
+            reader.readLine();
+            numeroLinea++;
+
+            while ((linea = reader.readLine()) != null) {
+                numeroLinea++;
+
+                try {
+                    String[] datos = linea.split(";");
+
+                    String nombreStr = datos[0];
+                    LocalDate fechaStr = LocalDate.parse(datos[2]);
+                    double precioStr = Double.parseDouble(datos[4]);
+
+                    Concierto concierto = new Concierto(nombreStr, fechaStr, new Recinto(null, null, 0), precioStr, TipoEvento.CONCIERTO, null, 0, null);
+
+                    mapaEventos.put(concierto.getId(), concierto);
+                    repo.guardar(concierto);
+
+                    System.out.println("Importado: " + nombreStr);
+
+                } catch (Exception e) {
+                    System.err.println("Error en línea " + numeroLinea + ": formato inválido");
+                }
             }
+
         } catch (FileNotFoundException e) {
             System.err.println("ERROR: Archivo no encontrado");
         } catch (IOException e) {
             System.err.println("ERROR: No se ha podido leer el archivo");
-
         }
     }
 
@@ -154,6 +173,5 @@ public class ServicioEvento {
             System.out.printf(" - Precio Sugerido: %.2f€%n", e.calcularPrecioVentaRecomendado());
             System.out.println("-----------------------------------");
         }
-
     }
 }
