@@ -17,6 +17,12 @@ public class ServicioEvento {
     private HashMap<String, Evento> mapaEventos = new HashMap<>();
     private static final String FICHERO_DATOS = "datos/eventos.dat";
 
+    public ServicioEvento() {
+        GestorPersistencia gestorPersistencia = new GestorPersistencia();
+        this.repo.cargar(gestorPersistencia.cargarDatos(FICHERO_DATOS));
+    }
+
+
     /**
      * Añadir un evento
      * @param nuevoEvento
@@ -173,6 +179,8 @@ public class ServicioEvento {
         GestorPersistencia gestorPersistencia = new GestorPersistencia();
         gestorPersistencia.guardarDatos(repo.listar(), FICHERO_DATOS);
     }
+
+
 
     /**
      * Genera informe financiero

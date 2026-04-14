@@ -41,6 +41,10 @@ public class RepositorioGenerico <T>{
 
     }
 
+    public void cargar(List<T> objeto) {
+        this.elementos = objeto;
+    }
+
     /**
      * Obtiene un elemento del repositorio según su índice.
      *

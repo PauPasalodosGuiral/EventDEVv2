@@ -1,14 +1,11 @@
 package com.azahartech.eventdev.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestorPersistencia {
     public <T> void guardarDatos(List<T> datos, String rutaArchivo) {
-
         File archivo = new File(rutaArchivo);
         if (archivo.exists()) {
             File backup = new File(rutaArchivo + ".bak");
@@ -23,6 +20,23 @@ public class GestorPersistencia {
         } catch (IOException e) {
             System.err.println("Error al guardar datos: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public <T> List<T> cargarDatos(String rutaArchivo) {
+        File archivo = new File(rutaArchivo);
+        if (!archivo.exists()) {
+            return new ArrayList<>();
+        }
+
+        try (FileInputStream fis = new FileInputStream(archivo);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+            Object objetoLeido = ois.readObject();
+            return (List<T>) objetoLeido;
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error al cargar los datos: " + e.getMessage());
+            return new ArrayList<>();
         }
     }
 }

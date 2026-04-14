@@ -111,6 +111,14 @@ public class Usuario implements Exportable, Serializable {
         this.esVip = esVip;
     }
 
+    public int getIntentosLoginFallidos() {
+        return intentosLoginFallidos;
+    }
+
+    public void setIntentosLoginFallidos(int intentosLoginFallidos) {
+        this.intentosLoginFallidos = intentosLoginFallidos;
+    }
+
     /**
      * Convierte los datos del usuario a formato XML.
      * @return una representación en XML del usuario
