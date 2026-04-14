@@ -2,6 +2,7 @@ package com.azahartech.eventdev.servicio;
 
 import com.azahartech.eventdev.modelo.*;
 import com.azahartech.eventdev.datos.RepositorioGenerico;
+import com.azahartech.eventdev.util.GestorPersistencia;
 import com.azahartech.eventdev.util.UtilidadLog;
 
 import java.io.*;
@@ -14,6 +15,7 @@ import java.util.*;
 public class ServicioEvento {
     private RepositorioGenerico<Evento> repo = new RepositorioGenerico<>();
     private HashMap<String, Evento> mapaEventos = new HashMap<>();
+    private static final String FICHERO_DATOS = "datos/eventos.dat";
 
     /**
      * Añadir un evento
@@ -165,6 +167,11 @@ public class ServicioEvento {
         } catch (IOException e) {
             System.err.println("ERROR: No se ha podido leer el archivo");
         }
+    }
+
+    public void guardar() {
+        GestorPersistencia gestorPersistencia = new GestorPersistencia();
+        gestorPersistencia.guardarDatos(repo.listar(), FICHERO_DATOS);
     }
 
     /**

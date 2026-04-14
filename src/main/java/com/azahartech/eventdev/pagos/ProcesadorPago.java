@@ -1,12 +1,14 @@
 package com.azahartech.eventdev.pagos;
 
+import java.io.Serializable;
+
 /**
  * Representa el procesador de pagos de la Aplicación
  * Esta interfaz define la lógica de cada uno de los tipos
  * específicos de pago (Tarjeta, PayPal, Bizum).
  */
 
-public interface ProcesadorPago {
+public interface ProcesadorPago extends Serializable {
     /**
      * Ejecuta el procesamiento de un pago basado en una cantidad específica de entradas.
      *
