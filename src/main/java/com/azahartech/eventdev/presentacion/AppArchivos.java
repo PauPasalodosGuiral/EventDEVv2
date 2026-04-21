@@ -10,19 +10,17 @@ import java.util.Scanner;
 
 public class AppArchivos {
     public static void main(String[] args) {
-        ServicioEvento servicioEvento = new ServicioEvento();
-        for (Evento evento : servicioEvento.listarTodosLosEventos()) {
-            System.out.println(evento.getNombre());
-        }
+        ServicioEvento servicio = new ServicioEvento();
+
+        Evento evento = new Concierto("Concierto Evento 1", LocalDate.of(2021, 12, 31), new Recinto("recinto1", "direccion1", 100), 100, TipoEvento.CONCIERTO, "Banda1", 2000,"Cancion1, Cancion2, Cancion23");
+
+        servicio.registrarEvento(new Concierto("Concierto Evento 1", LocalDate.of(2021, 12, 31), new Recinto("recinto1", "direccion1", 100), 100, TipoEvento.CONCIERTO, "Banda1", 2000,"Cancion1, Cancion2, Cancion23"));
+        servicio.registrarEvento(new Concierto("Concierto Evento 3", LocalDate.of(2033, 12, 31), new Recinto("recinto3", "direccion3", 120), 120, TipoEvento.CONCIERTO, "Banda2", 4000,"Cancion5, Cancion6, Cancion31"));
+        servicio.registrarEvento(new Concierto("Concierto Evento 5", LocalDate.of(2026, 12, 31), new Recinto("recinto5", "direccion5", 140), 140, TipoEvento.CONCIERTO, "Banda3", 20000,"Cancion2, Cancion23, Cancion13"));
+        servicio.registrarEvento(new Concierto("Concierto Evento 7", LocalDate.of(2027, 12, 31), new Recinto("recinto7", "direccion7", 160), 160, TipoEvento.CONCIERTO, "Banda4", 7000,"Cancion6, Cancion23, Cancion35"));
 
 
-        servicioEvento.guardar();
-
-
-
-        ServicioUsuario servicioUsuario = new ServicioUsuario();
-        servicioUsuario.registrarUsuario(new Usuario("pepe", "pepe@gmail.com", "111222333", false));
-        servicioUsuario.guardar();
+        servicio.exportarCatalogoAXML( "datos/agenda_export.xml");
 
 
     }

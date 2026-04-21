@@ -1,7 +1,10 @@
 package com.azahartech.eventdev.modelo;
 
+import com.azahartech.eventdev.datos.LocalDateAdapter;
 import com.azahartech.eventdev.util.Exportable;
 import com.azahartech.eventdev.util.UtilidadValidacion;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,14 +17,20 @@ import java.time.LocalDate;
  * Esta clase encapsula la información común a todos los eventos y
  * proporciona métodos para calcular precios de venta con margen estándar.
  */
-
+@XmlRootElement(name = "evento")
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Evento implements Exportable, Serializable {
 
+    @XmlAttribute
+    private String id;
+
     private String nombre;
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate fecha;
     private Recinto recinto;
     private double precio;
-    private String id;
+
     private EstadoEvento estado;
     private TipoEvento tipo;
     private static final long serialVersionUID = 1L;
@@ -40,8 +49,9 @@ public abstract class Evento implements Exportable, Serializable {
         estado = EstadoEvento.PLANIFICADO;
         tipo = nuevoTipo;
         this.id = UtilidadValidacion.generaraIdAutomatico(nombre);
-
     }
+
+    public Evento() {}
 
     // Getters
 

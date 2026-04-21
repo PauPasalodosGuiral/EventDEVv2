@@ -1,6 +1,9 @@
 package com.azahartech.eventdev.modelo;
 
 import com.azahartech.eventdev.util.Exportable;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -18,6 +21,7 @@ public class Recinto implements Exportable, Serializable {
     private int aforoMaximo;
     private boolean[] asientosVip;
 
+    public Recinto() {}
 
     public Recinto(String nuevoNombre, String nuevoDireccion, int nuevoAforoMaximo){
         nombre = nuevoNombre;
