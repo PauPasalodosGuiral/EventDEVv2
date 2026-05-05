@@ -7,7 +7,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.LocalDate;
 
-
+@XmlRootElement(name = "evento")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Concierto extends Evento implements Exportable {
 
     // ATRIBUTOS

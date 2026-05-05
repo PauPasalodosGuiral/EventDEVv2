@@ -9,7 +9,8 @@ import java.time.LocalDate;
 /**
  * Clase Partido
  */
-
+@XmlRootElement(name = "evento")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Partido extends Evento {
     private String equipoLocal;
     private String equipoVisitante;

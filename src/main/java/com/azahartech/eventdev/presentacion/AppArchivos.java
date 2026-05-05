@@ -21,7 +21,7 @@ public class AppArchivos {
 
 
         servicio.exportarCatalogoAXML( "datos/agenda_export.xml");
-
+        servicio.importarCatalogoDesdeXML("datos/agenda_export.xml");
 
     }
 }

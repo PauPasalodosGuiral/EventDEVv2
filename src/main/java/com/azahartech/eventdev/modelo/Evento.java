@@ -19,6 +19,7 @@ import java.time.LocalDate;
  */
 @XmlRootElement(name = "evento")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Concierto.class, Partido.class})
 public abstract class Evento implements Exportable, Serializable {
 
     @XmlAttribute

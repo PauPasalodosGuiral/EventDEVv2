@@ -6,8 +6,10 @@ import com.azahartech.eventdev.servicio.ServicioEvento;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,8 @@ public class VistaDashboard extends JFrame {
     private JMenuItem salirMenuItem;
     private JButton salirButton;
     private JMenuItem nuevoEventoMenuItem;
+    private JMenuItem importarAXML;
+    private JMenuItem exportarAXML;
     private JButton verDetallesButton;
     private JTable eventosTable;
     private static ServicioEvento servicioEvento;
@@ -82,17 +86,6 @@ private void initUI(String nombreUsuario) {
                 "CON" + i, LocalDate.now().plusDays(i), null, 100+i*10, null, null, 0, null
         ));
     }
-    List<Evento> listaEventos = servicioEvento.listarTodosLosEventos();
-
-    for (Evento evento : listaEventos) {
-        Object[] fila = {
-                evento.getId(),
-                evento.getNombre(),
-                evento.getFecha(),
-                evento.getPrecio()
-        };
-        eventosTableModel.addRow(fila);
-    }
 
     eventosTable = new JTable(eventosTableModel);
     
@@ -135,7 +128,14 @@ private void initUI(String nombreUsuario) {
         accionesMenu.add(nuevoEventoMenuItem);
         principalMenuBar.add(accionesMenu);
 
-        principalPanel.add(principalMenuBar, BorderLayout.NORTH);
+        importarAXML = new JMenuItem("Importar a XML");
+        accionesMenu.add(importarAXML);
+
+        exportarAXML = new JMenuItem("Exportar a XML");
+        accionesMenu.add(exportarAXML);
+
+
+    principalPanel.add(principalMenuBar, BorderLayout.NORTH);
 
 
 
@@ -180,6 +180,51 @@ private void initUI(String nombreUsuario) {
                 );
             }
         });
+
+        importarAXML.addActionListener( e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Seleccionar archivo XML para importar");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML (*.xml)", "xml");
+            fileChooser.setFileFilter(filtro);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+
+            int resultado = fileChooser.showOpenDialog(this);
+
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                try {
+                    servicioEvento.importarCatalogoDesdeXML(archivoSeleccionado.getAbsolutePath());
+
+                    refrescarTabla();
+                    JOptionPane.showMessageDialog(this, "Catálogo importado correctamente.", "Importación exitosa", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al importar:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        exportarAXML.addActionListener( e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar catálogo como XML");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML (*.xml)", "xml");
+            fileChooser.setFileFilter(filtro);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setSelectedFile(new File("catalogo.xml"));
+
+            int resultado = fileChooser.showSaveDialog(this);
+
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File archivo = fileChooser.getSelectedFile();
+                String ruta = archivo.getAbsolutePath();
+                if (!ruta.toLowerCase().endsWith(".xml")) ruta += ".xml";
+                try {
+                    servicioEvento.exportarCatalogoAXML(ruta);
+                    JOptionPane.showMessageDialog(this, "Catálogo exportado correctamente.", "Exportación exitosa", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al exportar:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
 
@@ -197,9 +242,7 @@ private void initUI(String nombreUsuario) {
 
     private void refrescarTabla() {
         eventosTableModel.setRowCount(0);
-
         List<Evento> listaEventos = servicioEvento.listarTodosLosEventos();
-
         for (Evento evento : listaEventos) {
             Object[] fila = {
                     evento.getId(),
